@@ -28,6 +28,8 @@ module.exports = {
         "simple-import-sort"
     ],
     "rules": {
+       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+       '@typescript-eslint/no-var-requires': 'off',
         "react/jsx-uses-react": "off",
         "react/react-in-jsx-scope": "off",
         "simple-import-sort/exports": "error",
