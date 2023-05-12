@@ -1,12 +1,15 @@
-import { Test } from '@/Test';
+import { ErrorBoundary } from 'react-error-boundary';
+import { BrowserRouter } from 'react-router-dom';
+
+import { Router } from './router/Router';
 
 function App() {
   return (
-    <>
-      <div>
-        <Test />
-      </div>
-    </>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
