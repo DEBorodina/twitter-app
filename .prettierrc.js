@@ -7,5 +7,6 @@ module.exports = {
     endOfLine: 'auto',
     semi: true,
     importOrder: ["^react(.*) | <THIRD_PARTY_MODULES>", "@/(.*)", "^[./]"],
-    importOrderSeparation: true
+    importOrderSeparation: true,
+    importOrderSortSpecifiers: true
 };

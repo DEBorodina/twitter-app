@@ -7,8 +7,10 @@ module.exports = {
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
     ],
+    
     "overrides": [
     ],
     "parser": "@typescript-eslint/parser",
@@ -27,6 +29,18 @@ module.exports = {
     ],
     "rules": {
         "react/jsx-uses-react": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "simple-import-sort/exports": "error",
+        'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          ['^react | <THIRD_PARTY_MODULES>'],
+          ['^@?\\w'],
+          ['@/(.*)'],
+          ['^[./]'],
+        ],
+      },
+    ],
     }
 }
