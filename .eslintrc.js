@@ -56,6 +56,7 @@ module.exports = {
         'react/prop-types':'off',
         'prefer-template':'off',
         'react/display-name':'off',
+        'import/no-extraneous-dependencies':'off',
         'no-nested-ternary':'off',
         '@typescript-eslint/no-shadow':'off',
         'pt-eslint/no-non-null-assertion':'off',
