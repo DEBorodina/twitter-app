@@ -1,20 +1,28 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { ROUTE_NAMES } from '@/constants/routesNames';
-import { FeedPage } from '@/pages/FeedPage';
-import { LogInPage } from '@/pages/LogInPage';
-import { ProfilePage } from '@/pages/ProfilePage';
-import { SignUpPage } from '@/pages/SignUpPage';
+import { useAppSelector } from '@/hooks';
 
-export const Router: React.FC = () => (
-  <Routes>
-    <Route path={ROUTE_NAMES.SIGN_UP} element={<SignUpPage />} />
-    <Route path={ROUTE_NAMES.LOGIN} element={<LogInPage />} />
-    <Route path={ROUTE_NAMES.FEED} element={<FeedPage />} />
-    <Route path={ROUTE_NAMES.PROFILE} element={<ProfilePage />} />
-    <Route
-      path="*"
-      element={<Navigate to={ROUTE_NAMES.SIGN_UP} replace={true} />}
-    />
-  </Routes>
-);
+import { privateRoutes, publicRoutes } from './routes';
+
+export const Router: React.FC = () => {
+  const { HOME, FEED } = ROUTE_NAMES;
+
+  const userId = useAppSelector((state) => state.firebase.auth.uid);
+
+  return (
+    <Routes>
+      {userId
+        ? privateRoutes.map(({ path, component }) => (
+            <Route key={path} path={path} element={component} />
+          ))
+        : publicRoutes.map(({ path, component }) => (
+            <Route key={path} path={path} element={component} />
+          ))}
+      <Route
+        path="*"
+        element={<Navigate to={userId ? FEED : HOME} replace />}
+      />
+    </Routes>
+  );
+};

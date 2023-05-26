@@ -3,4 +3,5 @@ export enum ROUTE_NAMES {
   LOGIN = '/login',
   PROFILE = '/profile',
   FEED = '/feed',
+  HOME = '/',
 }
