@@ -2,18 +2,20 @@ import moment from 'moment';
 import { useState } from 'react';
 
 import { useAppSelector } from '@/hooks';
+import { ITwitDataWithId } from '@/types';
 
 import { Modal } from '../Modal';
 import { Twit } from '../Twit';
-import { Date, Text,TwitContainer } from './styles';
+import { Date, Text, TwitContainer } from './styles';
 
-export const SearchTwit: React.FC<{
-  text: string;
-  createdAt: Date;
-  image: string;
-  id: string;
-}> = ({ text, createdAt, id, image }) => {
+export const SearchTwit: React.FC<ITwitDataWithId> = ({
+  text,
+  createdAt,
+  id,
+  image,
+}) => {
   const [isTwitOpen, setIsTwitOpen] = useState(false);
+
   const handleClick = () => {
     setIsTwitOpen(true);
   };

@@ -17,6 +17,8 @@ export interface IUserData extends Omit<ISignUPCredentials, 'password'> {
   gender?: string;
 }
 
+export interface IUserDataWithId extends IUserData, IWithId {}
+
 export interface IUpdateUserData
   extends Partial<Omit<IUserData, 'birthday' | 'email'>> {}
 

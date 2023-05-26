@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { icons } from '@/constants/icons';
@@ -19,17 +19,23 @@ import {
   Text,
   TwitButton,
 } from './styles';
-
-export interface SideMenuProps {
-  onDone: () => Promise<void>;
-}
+import { SideMenuProps } from './types';
 
 export const SideMenu = React.forwardRef<HTMLDivElement, SideMenuProps>(
   ({ onDone }: SideMenuProps, ref) => {
-    const { pathname } = useLocation();
     const [openModal, setOpenModal] = useState(false);
 
+    const { pathname } = useLocation();
+
     const dispatch = useAppDispatch();
+
+    const onAddTwit = () => {
+      setOpenModal(true);
+    };
+
+    const onSignOut = () => {
+      dispatch(signOut());
+    };
 
     return (
       <Menu ref={ref}>
@@ -50,13 +56,13 @@ export const SideMenu = React.forwardRef<HTMLDivElement, SideMenuProps>(
               </MenuItem>
             ))}
             <MenuItem>
-              <LogOutButton onClick={() => dispatch(signOut())}>
+              <LogOutButton onClick={onSignOut}>
                 <Icon>{icons.logout}</Icon>
                 <Text $isSelected={false}> Log out</Text>
               </LogOutButton>
             </MenuItem>
           </MenuList>
-          <TwitButton onClick={() => setOpenModal(true)}>Tweet</TwitButton>
+          <TwitButton onClick={onAddTwit}>Tweet</TwitButton>
         </Container>
       </Menu>
     );

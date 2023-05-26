@@ -5,19 +5,12 @@ import { usePopup } from '@/hooks';
 
 import {
   DropDown,
-  DropDownProps,
   Option,
   OptionList,
   SelectedButton,
   SelectedOption,
 } from './styles';
-
-export interface SelectorProps extends DropDownProps {
-  placeholder?: string;
-  options: string[];
-  onClick: (option: string) => void;
-  value?: string;
-}
+import { SelectorProps } from './types';
 
 export const Selector: React.FC<SelectorProps> = ({
   width,
@@ -28,9 +21,6 @@ export const Selector: React.FC<SelectorProps> = ({
 }) => {
   const [ref, isOpen, setIsOpen] = usePopup();
   const [selectedValue, setSelectedValue] = useState(value);
-  useEffect(() => {
-    setSelectedValue(value);
-  }, [value]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -42,6 +32,10 @@ export const Selector: React.FC<SelectorProps> = ({
     setSelectedValue(option);
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    setSelectedValue(value);
+  }, [value]);
 
   return (
     <DropDown width={width} ref={ref as React.RefObject<HTMLDivElement>}>

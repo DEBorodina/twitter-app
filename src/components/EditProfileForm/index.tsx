@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
-import { useAppDispatch,useAppSelector } from '@/hooks';
+import { theme } from '@/constants/themes';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { changeTheme } from '@/store/actions/themeActions';
 import { UserHelper } from '@/utils/UserHelper';
 
 import { Loader } from '../Loader';
@@ -20,24 +22,7 @@ import {
   Text,
   Title,
 } from './styles';
-
-export interface EditProfileData {
-  name: string;
-  telegram: string;
-  password: string;
-  gender: string;
-}
-
-export interface EditProfileFormProps {
-  setOpen: (open: boolean) => void;
-  onDone: () => Promise<void>;
-  user: {
-    name: string;
-    email: string;
-    gender?: string;
-    telegram?: string;
-  };
-}
+import { EditProfileData, EditProfileFormProps } from './types';
 
 export const EditProfileForm: React.FC<EditProfileFormProps> = ({
   setOpen,
@@ -47,7 +32,7 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
 
-  const theme = useAppSelector((state) => state.theme.theme);
+  const currentTheme = useAppSelector((state) => state.theme.theme);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('User name is required'),
@@ -71,7 +56,7 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
 
   const { errors: err } = formState;
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: EditProfileData) => {
     setIsLoading(true);
     await UserHelper.updateUser(data);
     await onDone();
@@ -86,6 +71,10 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
   const onCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setOpen(false);
+  };
+
+  const handleChangeTheme = (option: string) => {
+    dispatch(changeTheme(option as theme));
   };
 
   return (
@@ -142,12 +131,10 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
         <SelectorWithLabel>
           <Text>Theme</Text>
           <Selector
-            onClick={(option: string) =>
-              dispatch({ type: 'SWITCH_THEME', payload: option })
-            }
+            onClick={handleChangeTheme}
             width="100%"
             options={['light', 'dark']}
-            value={theme}
+            value={currentTheme}
           />
         </SelectorWithLabel>
       </SelectorsContainer>

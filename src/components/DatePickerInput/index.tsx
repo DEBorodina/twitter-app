@@ -4,10 +4,13 @@ import { Selector } from '@/components/Selector';
 import { monthNames } from '@/constants/monthNames';
 
 import { DataSelectors, Label } from './styles';
+import { DatePickerInputProps } from './types';
 
-export interface DatePickerInputProps {
-  onChange: (date: number) => void;
-}
+const years = new Array(new Date().getFullYear() - 1900)
+  .fill(0)
+  .map((_, i) => `${new Date().getFullYear() - i}`);
+
+const days = new Array(31).fill(0).map((_, i) => `${i + 1}`);
 
 export const DatePickerInput: React.FC<DatePickerInputProps> = ({
   onChange,
@@ -78,16 +81,14 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = ({
         <Selector
           width="25%"
           placeholder="Day"
-          options={new Array(31).fill(0).map((_, i) => `${i + 1}`)}
+          options={days}
           onClick={onDayChange}
           value={day ? String(day) : ''}
         />
         <Selector
           width="25%"
-          placeholder="year"
-          options={new Array(new Date().getFullYear() - 1900)
-            .fill(0)
-            .map((_, i) => `${new Date().getFullYear() - i}`)}
+          placeholder="Year"
+          options={years}
           onClick={onYearChange}
           value={year ? String(year) : ''}
         />

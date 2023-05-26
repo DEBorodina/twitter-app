@@ -16,13 +16,7 @@ import {
   SignUpLink,
   Title,
 } from './styles';
-
-export interface SignUpData {
-  email: string;
-  password: string;
-  name: string;
-  date: number;
-}
+import { SignUpData } from './types';
 
 export const SignUpPage = () => {
   const errors = useAppSelector((state) => state.auth.authError);

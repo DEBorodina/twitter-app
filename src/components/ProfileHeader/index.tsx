@@ -12,18 +12,8 @@ import {
   UserEmail,
   UserName,
 } from './styles';
+import { ProfileHeaderProps } from './types';
 
-export interface ProfileHeaderProps {
-  onProfileUpdate: () => Promise<void>;
-  user: {
-    name: string;
-    email: string;
-    gender?: string;
-    telegram?: string;
-  };
-  onMenuOpen: () => void;
-  onSearchOpen: () => void;
-}
 export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   onProfileUpdate,
   onMenuOpen,
@@ -31,6 +21,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   user,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { name, email } = user;
 
   const handleClick = () => {

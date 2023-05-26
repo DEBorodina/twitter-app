@@ -17,21 +17,14 @@ import {
   UserName,
   Wrapper,
 } from './styles';
-
-export interface WhatsHappeningFormProps {
-  onAddNewTwit: () => Promise<void>;
-  user: {
-    email: string;
-    name: string;
-  };
-}
+import { AddTwitProps, WhatsHappeningFormProps } from './types';
 
 export const WhatsHappeningForm: React.FC<WhatsHappeningFormProps> = ({
   onAddNewTwit,
   user: { name, email },
 }) => {
   const [twit, setTwit] = useState('');
-  const [image, setImage] = useState<File | null>();
+  const [image, setImage] = useState<File | undefined>();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTwit(e.target.value);
@@ -46,9 +39,8 @@ export const WhatsHappeningForm: React.FC<WhatsHappeningFormProps> = ({
   const addTwit = async (e: React.FormEvent) => {
     e.preventDefault();
     setTwit('');
-    setImage(null);
-    const data: { text: string; image?: File } = { text: twit };
-    if (image) data.image = image;
+    setImage(undefined);
+    const data: AddTwitProps = { text: twit, image };
     await TwitsHelper.addTwit(data);
     await onAddNewTwit();
   };
@@ -64,7 +56,7 @@ export const WhatsHappeningForm: React.FC<WhatsHappeningFormProps> = ({
           placeholder="Whats happening"
           value={twit}
           onChange={handleChange}
-         />
+        />
         <InputContainer>
           <Label htmlFor="file-input">{icons.image}</Label>
           <FileInput

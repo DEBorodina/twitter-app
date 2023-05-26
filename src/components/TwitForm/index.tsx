@@ -7,7 +7,6 @@ import { icons } from '@/constants/icons';
 import { TwitsHelper } from '@/utils/TwitsHelper';
 
 import { Loader } from '../Loader';
-import { SideMenuProps } from '../SideMenu';
 import {
   Button,
   ButtonsContainer,
@@ -21,15 +20,7 @@ import {
   TextArea,
   Title,
 } from './styles';
-
-export interface AddTwitProps {
-  text: string;
-  image: FileList;
-}
-
-export interface TwitFormProps extends SideMenuProps {
-  setOpen: (open: boolean) => void;
-}
+import { AddTwitProps, TwitFormProps } from './types';
 
 export const TwitForm: React.FC<TwitFormProps> = ({ onDone, setOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,6 +29,7 @@ export const TwitForm: React.FC<TwitFormProps> = ({ onDone, setOpen }) => {
     text: Yup.string().required('Text is required'),
     image: Yup.mixed(),
   });
+
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   const { register, handleSubmit, clearErrors, formState, watch } =
@@ -77,7 +69,7 @@ export const TwitForm: React.FC<TwitFormProps> = ({ onDone, setOpen }) => {
         placeholder="Twit"
         {...register('text')}
         onChange={handleChange}
-       />
+      />
       <InputContainer>
         <Label htmlFor="file-input">{icons.image}</Label>
         <FileInput

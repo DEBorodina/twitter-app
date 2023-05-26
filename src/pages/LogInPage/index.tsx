@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import { icons } from '@/constants/icons';
 import { ROUTE_NAMES } from '@/constants/routesNames';
-import { useAppDispatch,useAppSelector } from '@/hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks';
 import { resetAuthErrors, signIn } from '@/store/actions/authActions';
 
 import {
@@ -37,6 +37,7 @@ export const LogInPage = () => {
       .required('Password is required')
       .min(6, 'Password must be at least 6 characters'),
   });
+
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   const { register, handleSubmit, clearErrors, formState } =

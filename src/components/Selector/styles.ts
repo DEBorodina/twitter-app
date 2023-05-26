@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 
-export interface DropDownProps {
-  width: number | string;
-}
-
-export interface SelectedOptionProps {
-  $isPlaceHolder: boolean;
-}
+import { DropDownProps, SelectedOptionProps } from './types';
 
 export const DropDown = styled.div<DropDownProps>`
   width: ${(props) => props.width};
@@ -52,7 +46,6 @@ export const OptionList = styled.ul`
   border-bottom-right-radius: 6px;
   border: 1px solid ${(props) => props.theme.borderColor};
   background: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.textColor};
   z-index: 100;
   max-height: 120px;
   overflow-y: auto;
@@ -60,12 +53,12 @@ export const OptionList = styled.ul`
   &::-webkit-scrollbar {
     width: 10px;
     height: 10px;
-    background: rgba(0, 0, 0, 0.05);
+    background: ${(props) => props.theme.textColor}10;
     border-bottom-right-radius: 6px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
+    background: ${(props) => props.theme.textColor}20;
     border-radius: 10px;
     background-clip: padding-box;
   }

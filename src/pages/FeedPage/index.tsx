@@ -7,6 +7,7 @@ import { SideMenu } from '@/components/SideMenu';
 import { Twit } from '@/components/Twit';
 import { icons } from '@/constants/icons';
 import { useSideMenus } from '@/hooks';
+import { ITwitDataWithUserWithId } from '@/types';
 import { TwitsHelper } from '@/utils/TwitsHelper';
 import { UserHelper } from '@/utils/UserHelper';
 
@@ -20,17 +21,8 @@ import {
   TwitsContainer,
 } from './styles';
 
-export interface ITwit {
-  id: string;
-  authorName?: string;
-  authorEmail?: string;
-  text: string;
-  createdAt: Date;
-  image: string;
-}
-
 export const FeedPage = () => {
-  const [twits, setTwits] = useState([] as ITwit[]);
+  const [twits, setTwits] = useState([] as ITwitDataWithUserWithId[]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {

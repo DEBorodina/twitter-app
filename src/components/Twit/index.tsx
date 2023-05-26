@@ -1,8 +1,6 @@
 import moment from 'moment';
 import { useState } from 'react';
 
-import { ITwit } from '@/pages/FeedPage';
-
 import { Loader } from '../Loader';
 import {
   Container,
@@ -16,10 +14,7 @@ import {
   UserName,
   Wrapper,
 } from './styles';
-
-export interface TwitProps extends ITwit {
-  modal?: boolean;
-}
+import { TwitProps } from './types';
 
 export const Twit: React.FC<TwitProps> = ({
   authorName,
@@ -30,6 +25,11 @@ export const Twit: React.FC<TwitProps> = ({
   modal,
 }) => {
   const [isLoading, setIsLoading] = useState(Boolean(image));
+
+  const onLoad = () => {
+    setIsLoading(false);
+  };
+
   return (
     <Wrapper $inModal={Boolean(modal)}>
       <Container>
@@ -45,7 +45,7 @@ export const Twit: React.FC<TwitProps> = ({
           </LoaderContainer>
         )}
         <ImageContainer>
-          <Image src={image} onLoad={() => setIsLoading(false)} />
+          <Image src={image} onLoad={onLoad} />
         </ImageContainer>
       </Container>
     </Wrapper>

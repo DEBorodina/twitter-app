@@ -12,14 +12,7 @@ import {
   Text,
   UsersList,
 } from './styles';
-
-export interface SearchSideBarProps<T> {
-  placeholder: string;
-  fetchData: (search: string) => Promise<T[]>;
-  ListItem: React.FC<T>;
-  errorStatus: string;
-  innerRef: React.Ref<HTMLDivElement>;
-}
+import { SearchSideBarProps } from './types';
 
 export const SearchSideBar = <T extends { id: string }>({
   placeholder,
@@ -40,16 +33,23 @@ export const SearchSideBar = <T extends { id: string }>({
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (search) {
-      setIsLoading(true);
-      const newUsers = await fetchData(search);
-      setUsers(newUsers);
-      if (newUsers.length === 0) setStatus(errorStatus);
-      else setStatus('');
-      setIsLoading(false);
-    } else {
+
+    if (!search) {
       setUsers([]);
+      return;
     }
+
+    setIsLoading(true);
+
+    const newUsers = await fetchData(search);
+    setUsers(newUsers);
+
+    if (newUsers.length === 0) {
+      setStatus(errorStatus);
+    } else {
+      setStatus('');
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -57,11 +57,7 @@ export const SearchSideBar = <T extends { id: string }>({
       <Container>
         <SearchContainer onSubmit={handleSearch}>
           <SearchButton type="submit">{icons.search}</SearchButton>
-          <Input
-            placeholder={placeholder}
-            value={search}
-            onChange={onChange}
-           />
+          <Input placeholder={placeholder} value={search} onChange={onChange} />
         </SearchContainer>
         {isLoading ? (
           <Loader />

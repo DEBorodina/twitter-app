@@ -8,7 +8,7 @@ import { SideMenu } from '@/components/SideMenu';
 import { Twit } from '@/components/Twit';
 import { WhatsHappeningForm } from '@/components/WhatsHappeningForm';
 import { useAppSelector, useSideMenus } from '@/hooks';
-import { ITwitDataWithUserWithId } from '@/types';
+import { ITwitDataWithUserWithId, IUserData } from '@/types';
 import { TwitsHelper } from '@/utils/TwitsHelper';
 
 import {
@@ -21,6 +21,12 @@ import {
 export const ProfilePage = () => {
   const [twits, setTwits] = useState([] as ITwitDataWithUserWithId[]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { name, email, gender, telegram, isLoaded } = useAppSelector(
+    (state) => state.firebase.profile
+  );
+
+  const user = { name, email, gender, telegram, isLoaded };
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -35,8 +41,6 @@ export const ProfilePage = () => {
     fetchData();
   }, []);
 
-  const user = useAppSelector((state) => state.firebase.profile);
-
   return (
     <Container>
       {menu.isOpen && <SideMenu ref={menu.ref} onDone={fetchData} />}
@@ -49,7 +53,10 @@ export const ProfilePage = () => {
               onMenuOpen={menu.onOpen}
               onSearchOpen={search.onOpen}
             />
-            <WhatsHappeningForm onAddNewTwit={fetchData} user={user} />
+            <WhatsHappeningForm
+              onAddNewTwit={fetchData}
+              user={user as IUserData}
+            />
           </>
         ) : (
           <LoaderContainer>

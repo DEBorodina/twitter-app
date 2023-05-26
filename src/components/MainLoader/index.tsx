@@ -8,6 +8,7 @@ import { MainLoaderProps } from './types';
 
 export const MainLoader: React.FC<MainLoaderProps> = ({ children }) => {
   const auth = useAppSelector((state) => state.firebase.auth);
+
   if (!isLoaded(auth))
     return (
       <LoaderContainer>
