@@ -8,11 +8,17 @@ export const Container = styled.div`
 `;
 
 export const FeedContainer = styled.div`
-  margin-top: 30px;
-  margin-left: max(20%, 220px);
-  margin-right: max(20%, 220px);
+  margin-top: ${(props) => props.theme.FEED_PAGE_MARGIN_TOP}px;
+  margin-left: max(
+    ${(props) => props.theme.SIDE_BAR_WIDTH}%,
+    ${(props) => props.theme.SIDE_BAR_MIN_WIDTH}px
+  );
+  margin-right: max(
+    ${(props) => props.theme.SIDE_BAR_WIDTH}%,
+    ${(props) => props.theme.SIDE_BAR_MIN_WIDTH}px
+  );
   width: 100%;
-  margin-bottom: 100px;
+  margin-bottom: ${(props) => props.theme.FEED_PAGE_MARGIN_BOTTOM}px;
 
   @media (max-width: 820px) {
     margin-left: 0;
@@ -21,7 +27,7 @@ export const FeedContainer = styled.div`
 `;
 
 export const FeedTitle = styled.h1`
-  font-size: 20px;
+  font-size: ${(props) => props.theme.FEED_TITLE_FONT_SIZE}px;
   margin: 0 auto;
 `;
 
@@ -34,7 +40,7 @@ export const LoaderContainer = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: ${(props) => props.theme.FEED_PAGE_MARGIN_BOTTOM}px;
 `;
 
 export const ModalButton = styled.button`

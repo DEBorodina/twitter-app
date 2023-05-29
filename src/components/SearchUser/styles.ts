@@ -2,17 +2,17 @@ import styled from 'styled-components';
 
 export const User = styled.li`
   width: 100%;
-  padding: 10px;
+  padding: ${(props) => props.theme.SEARCH_PADDING}px;
   background: ${(props) => props.theme.inputColor};
-  border-radius: 10px;
-  margin-bottom: 5px;
+  border-radius: ${(props) => props.theme.SEARCH_TWIT_RADIUS}px;
+  margin-bottom: ${(props) => props.theme.SEARCH_PADDING / 2}px;
 `;
 
 export const UserName = styled.p`
-  font-size: 12px;
+  font-size: ${(props) => props.theme.SEARCH_FONT_SIZE}px;
   color: ${(props) => props.theme.textColor};
 `;
 export const UserEmail = styled.p`
-  font-size: 10px;
+  font-size: ${(props) => props.theme.SEARCH_FONT_SIZE - 2}px;
   opacity: 0.5;
 `;
