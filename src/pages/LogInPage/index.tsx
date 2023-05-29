@@ -7,6 +7,7 @@ import { icons } from '@/constants/icons';
 import { ROUTE_NAMES } from '@/constants/routesNames';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { resetAuthErrors, signIn } from '@/store/actions/authActions';
+import { ICredentials } from '@/types';
 
 import {
   Container,
@@ -17,17 +18,12 @@ import {
   Title,
 } from './styles';
 
-export interface LogInData {
-  email: string;
-  password: string;
-}
-
 export const LogInPage = () => {
   const errors = useAppSelector((state) => state.auth.authError);
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = ({ email, password }: LogInData) => {
+  const onSubmit = ({ email, password }: ICredentials) => {
     dispatch(signIn({ email, password }));
   };
 
@@ -41,7 +37,7 @@ export const LogInPage = () => {
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   const { register, handleSubmit, clearErrors, formState } =
-    useForm<LogInData>(formOptions);
+    useForm<ICredentials>(formOptions);
   const { errors: err } = formState;
 
   const handleChange = () => {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { icons } from '@/constants/icons';
 
@@ -49,8 +49,14 @@ export const SearchSideBar = <T extends { id: string }>({
     } else {
       setStatus('');
     }
+
     setIsLoading(false);
   };
+
+  const itemsList = useMemo(
+    () => users.map((data) => <ListItem {...data} key={data.id} />),
+    [users]
+  );
 
   return (
     <Menu ref={innerRef}>
@@ -64,11 +70,7 @@ export const SearchSideBar = <T extends { id: string }>({
         ) : status ? (
           <Text>{status}</Text>
         ) : (
-          <UsersList>
-            {users.map((data) => (
-              <ListItem {...data} key={data.id} />
-            ))}
-          </UsersList>
+          <UsersList>{itemsList}</UsersList>
         )}
       </Container>
     </Menu>

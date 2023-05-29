@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { icons } from '@/constants/icons';
 import { usePopup } from '@/hooks';
@@ -33,6 +33,16 @@ export const Selector: React.FC<SelectorProps> = ({
     setIsOpen(false);
   };
 
+  const optionsItems = useMemo(
+    () =>
+      options.map((option) => (
+        <Option key={option} onClick={handleSelectOption(option)}>
+          {option}
+        </Option>
+      )),
+    [options]
+  );
+
   useEffect(() => {
     setSelectedValue(value);
   }, [value]);
@@ -45,15 +55,7 @@ export const Selector: React.FC<SelectorProps> = ({
         </SelectedOption>
         {icons.arrow}
       </SelectedButton>
-      {isOpen && (
-        <OptionList>
-          {options.map((option) => (
-            <Option key={option} onClick={handleSelectOption(option)}>
-              {option}
-            </Option>
-          ))}
-        </OptionList>
-      )}
+      {isOpen && <OptionList>{optionsItems}</OptionList>}
     </DropDown>
   );
 };

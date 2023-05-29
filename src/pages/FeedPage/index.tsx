@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Loader } from '@/components/Loader';
 import { SearchSideBar } from '@/components/SearchSideBar';
@@ -32,11 +32,27 @@ export const FeedPage = () => {
     setTwits(twits);
   };
 
+  const twitsList = useMemo(
+    () =>
+      twits.map(({ authorName, text, createdAt, id, authorEmail, image }) => (
+        <Twit
+          authorName={authorName}
+          authorEmail={authorEmail}
+          text={text}
+          createdAt={createdAt}
+          id={id}
+          key={id}
+          image={image}
+        />
+      )),
+    [twits]
+  );
+
+  const [menu, search] = useSideMenus();
+
   useEffect(() => {
     fetchData();
   }, []);
-
-  const [menu, search] = useSideMenus();
 
   return (
     <Container>
@@ -53,19 +69,7 @@ export const FeedPage = () => {
               <Loader />
             </LoaderContainer>
           ) : (
-            twits.map(
-              ({ authorName, text, createdAt, id, authorEmail, image }) => (
-                <Twit
-                  authorName={authorName}
-                  authorEmail={authorEmail}
-                  text={text}
-                  createdAt={createdAt}
-                  id={id}
-                  key={id}
-                  image={image}
-                />
-              )
-            )
+            twitsList
           )}
         </TwitsContainer>
       </FeedContainer>

@@ -32,6 +32,7 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = ({
 
   const onMonthChange = (option: string) => {
     const month = monthNames.findIndex((monthName) => monthName === option);
+
     if (day !== null) {
       const daysInAMonth = new Date(year || 0, month + 1, 0).getDate();
       if (daysInAMonth < day) {
@@ -39,8 +40,11 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = ({
       }
     }
     setMonth(month);
+
     const newDate = createDate(year, month, day);
-    if (newDate) onChange(newDate.getTime());
+    if (newDate) {
+      onChange(newDate.getTime());
+    }
   };
 
   const onDayChange = (option: string) => {
@@ -50,9 +54,13 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = ({
         return;
       }
     }
+
     setDay(+option);
+
     const newDate = createDate(year, month, +option);
-    if (newDate) onChange(newDate.getTime());
+    if (newDate) {
+      onChange(newDate.getTime());
+    }
   };
 
   const onYearChange = (option: string) => {
@@ -63,8 +71,11 @@ export const DatePickerInput: React.FC<DatePickerInputProps> = ({
       }
     }
     setYear(+option);
+
     const newDate = createDate(+option, month, day);
-    if (newDate) onChange(newDate.getTime());
+    if (newDate) {
+      onChange(newDate.getTime());
+    }
   };
 
   return (
