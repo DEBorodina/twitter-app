@@ -10,7 +10,6 @@ export interface EditProfileFormProps {
   onDone: () => Promise<void>;
   user: {
     name: string;
-    email: string;
     gender?: string;
     telegram?: string;
   };

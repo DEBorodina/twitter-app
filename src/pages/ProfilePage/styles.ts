@@ -37,4 +37,5 @@ export const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: ${(props) => props.theme.FEED_PAGE_MARGIN_BOTTOM}px;
+  margin-bottom: ${(props) => props.theme.FEED_PAGE_MARGIN_BOTTOM}px;
 `;

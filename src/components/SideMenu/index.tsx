@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { icons } from '@/constants/icons';
@@ -21,7 +21,7 @@ import {
 } from './styles';
 import { SideMenuProps } from './types';
 
-export const SideMenu = React.forwardRef<HTMLDivElement, SideMenuProps>(
+export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
   ({ onDone }: SideMenuProps, ref) => {
     const [openModal, setOpenModal] = useState(false);
 
@@ -37,6 +37,19 @@ export const SideMenu = React.forwardRef<HTMLDivElement, SideMenuProps>(
       dispatch(signOut());
     };
 
+    const menuListItems = useMemo(
+      () =>
+        menuItems.map(({ to, title, icon, selectedIcon }) => (
+          <MenuItem key={title}>
+            <MenuLink to={to}>
+              <Icon>{pathname === to ? selectedIcon : icon}</Icon>
+              <Text $isSelected={pathname === to}>{title}</Text>
+            </MenuLink>
+          </MenuItem>
+        )),
+      []
+    );
+
     return (
       <Menu ref={ref}>
         {openModal && (
@@ -47,14 +60,7 @@ export const SideMenu = React.forwardRef<HTMLDivElement, SideMenuProps>(
         <Container>
           {icons.twitter}
           <MenuList>
-            {menuItems.map(({ to, title, icon, selectedIcon }) => (
-              <MenuItem key={title}>
-                <MenuLink to={to}>
-                  <Icon>{pathname === to ? selectedIcon : icon}</Icon>
-                  <Text $isSelected={pathname === to}>{title}</Text>
-                </MenuLink>
-              </MenuItem>
-            ))}
+            {menuListItems}
             <MenuItem>
               <LogOutButton onClick={onSignOut}>
                 <Icon>{icons.logout}</Icon>

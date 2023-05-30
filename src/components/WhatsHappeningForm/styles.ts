@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { ButtonProps } from './types';
+
 export const Wrapper = styled.div`
   width: 100%;
   min-height: ${(props) => props.theme.TWIT_MIN_HEIGHT}px;
@@ -70,9 +72,6 @@ export const FileInput = styled.input`
   display: none;
 `;
 
-export interface ButtonProps {
-  $disabled: boolean;
-}
 export const Button = styled.button<ButtonProps>`
   width: ${(props) => props.theme.FORM_BUTTON_WIDTH}px;
   background: ${(props) => props.theme.BLUE_COLOR};

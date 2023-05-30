@@ -62,7 +62,9 @@ export const SearchSideBar = <T extends { id: string }>({
     <Menu ref={innerRef}>
       <Container>
         <SearchContainer onSubmit={handleSearch}>
-          <SearchButton type="submit">{icons.search}</SearchButton>
+          <SearchButton type="submit" aria-label="search-button">
+            {icons.search}
+          </SearchButton>
           <Input placeholder={placeholder} value={search} onChange={onChange} />
         </SearchContainer>
         {isLoading ? (
