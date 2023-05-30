@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Main = styled.main`
   width: 100%;
-  height: calc(100vh - 55px);
+  height: calc(100vh - ${(props) => props.theme.MAIN_FOOTER_HEIGHT}px);
   display: flex;
   align-items: center;
 `;
@@ -21,11 +21,12 @@ export const Image = styled.div`
   background-repeat: no-repeat;
 
   background-size: 100vh;
-  height: calc(100vh - 55px);
+  height: calc(100vh - ${(props) => props.theme.MAIN_FOOTER_HEIGHT}px);
   width: 100vh;
 
   @media (max-width: 1000px) {
-    background-position: right -15vh top 0px;
+    background-position: right ${(props) => props.theme.MAIN_IMAGE_OFFSET}vh top
+      0px;
   }
 
   @media (max-width: 820px) {
@@ -36,21 +37,21 @@ export const Image = styled.div`
 export const Content = styled.div`
   margin: auto;
   width: 30%;
-  min-width: 360px;
-  padding-left: 20px;
-  padding-right: 20px;
+  min-width: ${(props) => props.theme.MAIN_MIN_CONTENT_WIDTH}px;
+  padding-left: ${(props) => props.theme.MAIN_CONTENT_PADDING}px;
+  padding-right: ${(props) => props.theme.MAIN_CONTENT_PADDING}px;
 `;
 
 export const ButtonCss = css`
-  width: 320px;
-  height: 50px;
+  width: ${(props) => props.theme.AUTH_BUTTON_WIDTH}px;
+  height: ${(props) => props.theme.AUTH_BUTTON_HEIGHT}px;
   border: 1px solid ${(props) => props.theme.borderColor};
-  border-radius: 42px;
+  border-radius: ${(props) => props.theme.AUTH_BUTTON_RADIUS}px;
   background-color: transparent;
   display: block;
-  margin-bottom: 21px;
-  font-weight: 500;
-  font-size: 16px;
+  margin-bottom: ${(props) => props.theme.MAIN_CONTENT_PADDING}px;
+  font-weight: ${(props) => props.theme.MEDIUM_FONT_WEIGHT};
+  font-size: ${(props) => props.theme.AUTH_BUTTON_FONT_SIZE}px;
 
   display: flex;
   align-items: center;
@@ -75,36 +76,36 @@ export const ButtonWithIconContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  width: 58%;
+  width: ${(props) => props.theme.AUTH_BUTTON_WITH_ICON_WIDTH}%;
   margin: 0 auto;
 `;
 
 export const Title = styled.h1`
-  margin-top: 27px;
-  margin-bottom: 26px;
-  font-size: 46px;
+  margin-top: ${(props) => props.theme.MAIN_TITLE_MARGIN}px;
+  margin-bottom: ${(props) => props.theme.MAIN_TITLE_MARGIN}px;
+  font-size: ${(props) => props.theme.MAIN_TITLE_FONT_SIZE}px;
   font-family: 'Roboto', sans-serif;
-  font-weight: 900;
+  font-weight: ${(props) => props.theme.BOLD_FONT_WEIGHT};
 `;
 
 export const SubTitle = styled.h2`
   ${Title}
-  font-size: 34px;
-  margin-bottom: 31px;
+  font-size: ${(props) => props.theme.MAIN_SUBTITLE_FONT_SIZE}px;
+  margin-bottom: ${(props) => props.theme.MAIN_SUBTITLE_MARGIN}px;
 `;
 
 export const Text = styled.p`
-  margin-bottom: 21px;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+  margin-bottom: ${(props) => props.theme.MAIN_TEXT_FONT_SIZE}px;
+  font-weight: ${(props) => props.theme.MEDIUM_FONT_WEIGHT};
+  font-size: ${(props) => props.theme.MAIN_TEXT_FONT_SIZE}px;
+  line-height: ${(props) => props.theme.MAIN_TEXT_LINE_HEIGHT}px;
 `;
 
 export const TextLink = styled(Link)`
-  margin-bottom: 21px;
-  font-weight: 400;
-  font-size: 14px;
-  color: #1e97e1;
+  margin-bottom: ${(props) => props.theme.MAIN_TEXT_MARGIN_BOTTOM}px;
+  font-weight: ${(props) => props.theme.MEDIUM_FONT_WEIGHT};
+  font-size: ${(props) => props.theme.MAIN_TEXT_FONT_SIZE}px;
+  color: ${(props) => props.theme.BLUE_COLOR};
 
   &:hover {
     filter: brightness(0.8);
@@ -121,21 +122,20 @@ export const Footer = styled.footer`
 export const FooterList = styled.ul`
   margin: 0 auto;
   width: fit-content;
-  max-width: 95%;
+  max-width: ${(props) => props.theme.MAIN_FOOTER_WIDTH}%;
   display: flex;
   flex-wrap: wrap;
-  height: 55px;
+  height: ${(props) => props.theme.MAIN_FOOTER_HEIGHT}px;
 `;
 
 export const FooterListItem = styled.li`
-  padding: 5px;
+  padding: ${(props) => props.theme.MAIN_FOOTER_PADDING}px;
   margin: auto 0;
-  font-size: 13px;
+  font-size: ${(props) => props.theme.MAIN_TEXT_FONT_SIZE}px;
 `;
 
 export const FooterListItemLink = styled(Link)`
   margin: 0 auto;
-  font-weight: 400;
-  line-height: 15px;
+  font-weight: ${(props) => props.theme.MEDIUM_FONT_WEIGHT};
   color: ${(props) => props.theme.textColor};
 `;

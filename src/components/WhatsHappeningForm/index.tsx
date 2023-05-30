@@ -38,11 +38,13 @@ export const WhatsHappeningForm: React.FC<WhatsHappeningFormProps> = ({
 
   const addTwit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setTwit('');
-    setImage(undefined);
-    const data: AddTwitProps = { text: twit, image };
-    await TwitsHelper.addTwit(data);
-    await onAddNewTwit();
+    if (twit) {
+      setTwit('');
+      setImage(undefined);
+      const data: AddTwitProps = { text: twit, image };
+      await TwitsHelper.addTwit(data);
+      await onAddNewTwit();
+    }
   };
 
   return (
@@ -68,7 +70,7 @@ export const WhatsHappeningForm: React.FC<WhatsHappeningFormProps> = ({
           <Text>{image?.name}</Text>
         </InputContainer>
         <ButtonsContainer>
-          <Button type="submit" $disabled={twit === ''}>
+          <Button type="submit" $disabled={twit === ''} aria-label="add-button">
             Twit
           </Button>
         </ButtonsContainer>

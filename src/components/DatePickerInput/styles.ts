@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const DataSelectors = styled.div`
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: ${(props) => props.theme.DATE_PICKER_MARGIN_BOTTOM * 2}px;
   display: flex;
   justify-content: space-between;
 `;
@@ -10,5 +10,5 @@ export const DataSelectors = styled.div`
 export const Label = styled.p`
   width: 100%;
   text-align: left;
-  margin-bottom: 10px;
+  margin-bottom: ${(props) => props.theme.DATE_PICKER_MARGIN_BOTTOM}px;
 `;

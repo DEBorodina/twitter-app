@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const Header = styled.header`
-  width: 90%;
+  width: ${(props) => props.theme.HEADER_WIDTH}%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: ${(props) => props.theme.HEADER_MARGIN_BOTTOM}px;
 `;
 
 export const User = styled.div`
@@ -35,20 +35,20 @@ export const UserEmail = styled.h2`
 
 export const EditButton = styled.button`
   background: transparent;
-  width: 100px;
-  height: 30px;
+  width: ${(props) => props.theme.EDIT_BUTTON_WIDTH}px;
+  height: ${(props) => props.theme.EDIT_BUTTON_HEIGHT}px;
   border: 1px solid ${(props) => props.theme.borderColor};
   color: ${(props) => props.theme.textColor};
-  border-radius: 20px;
-  margin-right: 10px;
-  font-size: 12px;
+  border-radius: ${(props) => props.theme.MODAl_RADIUS}px;
+  margin-right: ${(props) => props.theme.EDIT_BUTTON_MARGIN_RIGHT}px;
+  font-size: ${(props) => props.theme.EDIT_BUTTON_FONT_SIZE}px;
 
   &:hover {
     cursor: pointer;
   }
 
   @media (max-width: 500px) {
-    font-size: 10px;
+    font-size: ${(props) => props.theme.EDIT_BUTTON_FONT_SIZE - 2}px;
   }
 `;
 
@@ -59,5 +59,9 @@ export const ModalButton = styled.button`
 
   @media (max-width: 820px) {
     display: block;
+  }
+
+  & svg * {
+    fill: ${(props) => props.theme.textColor};
   }
 `;

@@ -10,3 +10,7 @@ export interface WhatsHappeningFormProps {
     name: string;
   };
 }
+
+export interface ButtonProps {
+  $disabled: boolean;
+}

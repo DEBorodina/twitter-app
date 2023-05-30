@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
 export const Menu = styled.div`
-  position: relative;
-  z-index: 100;
+  z-index: ${(props) => props.theme.SIDE_BAR_Z_INDEX};
   background-color: ${(props) => props.theme.backgroundColor};
-  width: 20%;
-  min-width: 220px;
-  min-height: 100vh;
+  width: ${(props) => props.theme.SIDE_BAR_WIDTH}%;
+  min-width: ${(props) => props.theme.SIDE_BAR_MIN_WIDTH}px;
+  min-height: ${(props) => props.theme.SIDE_BAR_MIN_HEIGHT}vh;
   border-left: 1px solid ${(props) => props.theme.borderColor};
   color: ${(props) => props.theme.textColor};
   position: fixed;
@@ -16,7 +15,7 @@ export const Menu = styled.div`
 
 export const Container = styled.div`
   width: 100%;
-  margin-top: 30px;
+  margin-top: ${(props) => props.theme.SIDE_BAR_MARGIN_TOP}px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -24,27 +23,27 @@ export const Container = styled.div`
 
 export const SearchContainer = styled.form`
   margin: 0 auto;
-  width: 90%;
-  height: 40px;
+  width: ${(props) => props.theme.SEARCH_WIDTH}%;
+  height: ${(props) => props.theme.SEARCH_HEIGHT}px;
   background: ${(props) => props.theme.inputColor};
-  border-radius: 31px;
+  border-radius: ${(props) => props.theme.SEARCH_RADIUS}px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-bottom: 20px;
+  padding-left: ${(props) => props.theme.SEARCH_PADDING}px;
+  padding-right: ${(props) => props.theme.SEARCH_PADDING}px;
+  margin-bottom: ${(props) => props.theme.SEARCH_PADDING * 2}px;
 `;
 
 export const Input = styled.input`
   background-color: transparent;
   outline: none;
   border: none;
-  font-size: 12px;
+  font-size: ${(props) => props.theme.SEARCH_FONT_SIZE}px;
   margin: auto;
-  height: 16px;
-  padding-left: 10px;
-  width: 90%;
+  height: ${(props) => props.theme.INPUT_HEIGHT}px;
+  padding-left: ${(props) => props.theme.SEARCH_PADDING}px;
+  width: ${(props) => props.theme.SEARCH_WIDTH}%;
   color: ${(props) => props.theme.textColor};
 
   &::placeholder {
@@ -68,7 +67,7 @@ export const SearchButton = styled.button`
 
 export const UsersList = styled.ul`
   margin: 0 auto;
-  width: 90%;
+  width: ${(props) => props.theme.SEARCH_WIDTH}%;
 `;
 
 export const Text = styled.p`

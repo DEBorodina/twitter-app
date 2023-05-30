@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.form`
-  width: 30%;
-  min-width: 320px;
+  width: ${(props) => props.theme.LOGIN_CONTAINER_WIDTH}%;
+  min-width: ${(props) => props.theme.LOGIN_CONTAINER_MIN_WIDTH}px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: ${(props) => props.theme.LOGIN_CONTAINER_MARGIN_TOP}px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,38 +14,36 @@ export const Container = styled.form`
 
 export const Title = styled.h1`
   width: 100%;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  font-size: 30px;
+  margin-top: ${(props) => props.theme.SIGN_UP_TITLE_TOP}px;
+  margin-bottom: ${(props) => props.theme.SIGN_UP_TITLE_BOTTOM}px;
+  font-size: ${(props) => props.theme.SIGN_UP_BOTTOM_FONT_SIZE}px;
   font-family: 'Roboto', sans-serif;
-  font-weight: 900;
   text-align: center;
 `;
 
 export const Input = styled.input`
   width: 100%;
-  margin-bottom: 25px;
-  height: 50px;
+  margin-bottom: ${(props) => props.theme.INPUT_MARGIN_BOTTOM}px;
+  height: ${(props) => props.theme.MEDIUM_INPUT_HEIGHT}px;
   background: ${(props) => props.theme.backgroundColor};
   border: 1px solid ${(props) => props.theme.borderColor};
   color: ${(props) => props.theme.textColor};
-  border-radius: 6px;
-  padding-left: 20px;
-  padding-right: 20px;
-  font-size: 16px;
+  border-radius: ${(props) => props.theme.INPUT_BORDER_RADIUS}px;
+  padding-left: ${(props) => props.theme.INPUT_PADDING}px;
+  padding-right: ${(props) => props.theme.INPUT_PADDING}px;
+  font-size: ${(props) => props.theme.INPUT_FONT_SIZE}px;
   outline: none;
 `;
 
 export const LoginButton = styled.button`
   width: 100%;
-  background: #1da1f2;
-  border-radius: 76px;
-  height: 50px;
-  color: #ffffff;
+  background: ${(props) => props.theme.BLUE_COLOR};
+  border-radius: ${(props) => props.theme.TWIT_BUTTON_BORDER_RADIUS}px;
+  height: ${(props) => props.theme.TWIT_BUTTON_HEIGHT}px;
+  color: ${(props) => props.theme.WHITE_COLOR};
   border: none;
-  font-weight: 700;
-  font-size: 18px;
-  margin-bottom: 40px;
+  font-size: ${(props) => props.theme.SIGN_UP_FONT_SIZE}px;
+  margin-bottom: ${(props) => props.theme.SIGN_UP_TITLE_TOP}px;
 
   &:hover {
     filter: brightness(0.9);
@@ -55,8 +53,8 @@ export const LoginButton = styled.button`
 
 export const SignUpLink = styled(Link)`
   text-decoration: none;
-  color: #1da1f2;
-  font-size: 18px;
+  color: ${(props) => props.theme.BLUE_COLOR};
+  font-size: ${(props) => props.theme.SIGN_UP_FONT_SIZE}px;
   text-align: right;
   width: 100%;
 
@@ -66,10 +64,9 @@ export const SignUpLink = styled(Link)`
 `;
 
 export const ErrorText = styled.p`
-  text-decoration: none;
-  color: red;
-  font-size: 12px;
-  margin-bottom: 10px;
-  height: 25px;
+  color: ${(props) => props.theme.ERROR_COLOR};
+  font-size: ${(props) => props.theme.ERROR_TEXT_FONT_SIZE}px;
+  margin-bottom: ${(props) => props.theme.ERROR_TEXT_MARGIN_BOTTOM}px;
+  height: ${(props) => props.theme.ERROR_TEXT_HEIGHT}px;
   width: 100%;
 `;

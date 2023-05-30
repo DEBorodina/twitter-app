@@ -16,7 +16,10 @@ export const Modal: React.FC<ModalProps> = ({ children, setOpen }) => {
   return createPortal(
     isOpenPopUp && (
       <OverLay>
-        <ModalWindow ref={ref as React.RefObject<HTMLDivElement>}>
+        <ModalWindow
+          ref={ref as React.RefObject<HTMLDivElement>}
+          aria-label="modal"
+        >
           {children}
         </ModalWindow>
       </OverLay>

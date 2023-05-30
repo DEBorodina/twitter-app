@@ -16,8 +16,8 @@ export const ModalWindow = styled.div`
   left: 0;
   transform: translate(calc(50vw - 50%), calc(50vh - 50%));
   background-color: ${(props) => props.theme.backgroundColor};
-  border-radius: 20px;
-  z-index: 1000;
-  width: 90vw;
-  max-width: 500px;
+  border-radius: ${(props) => props.theme.MODAl_RADIUS}px;px;
+  z-index: ${(props) => props.theme.MODAL_Z_INDEX}px;
+  width: ${(props) => props.theme.MODAL_WIDTH}vw;
+  max-width: ${(props) => props.theme.MODAl_MAX_WIDTH}px;
 `;

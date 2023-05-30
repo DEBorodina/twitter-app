@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { footerLinks } from '@/constants/footerLinks';
 import { icons } from '@/constants/icons';
 import { ROUTE_NAMES } from '@/constants/routesNames';
@@ -29,6 +31,16 @@ export const HomePage = () => {
     dispatch(signInWithGoogle());
   };
 
+  const footerLinksItems = useMemo(
+    () =>
+      footerLinks.map(({ name, to }) => (
+        <FooterListItem key={name}>
+          <FooterListItemLink to={to}>{name}</FooterListItemLink>
+        </FooterListItem>
+      )),
+    []
+  );
+
   return (
     <Container>
       <Main>
@@ -57,11 +69,7 @@ export const HomePage = () => {
       </Main>
       <Footer>
         <FooterList>
-          {footerLinks.map(({ name, to }) => (
-            <FooterListItem key={name}>
-              <FooterListItemLink to={to}>{name}</FooterListItemLink>
-            </FooterListItem>
-          ))}
+          {footerLinksItems}
           <FooterListItem>© 2021 Twitter, Inc.</FooterListItem>
         </FooterList>
       </Footer>

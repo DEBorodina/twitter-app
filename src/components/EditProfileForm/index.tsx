@@ -138,7 +138,6 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
           />
         </SelectorWithLabel>
       </SelectorsContainer>
-
       <ButtonsContainer>
         <Button type="submit">save</Button>
         <Button onClick={onCancel}>cancel</Button>

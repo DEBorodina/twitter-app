@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useMemo, useState } from 'react';
 
 import { icons } from '@/constants/icons';
 import { usePopup } from '@/hooks';
@@ -33,27 +33,31 @@ export const Selector: React.FC<SelectorProps> = ({
     setIsOpen(false);
   };
 
-  useEffect(() => {
-    setSelectedValue(value);
-  }, [value]);
+  const optionsItems = useMemo(
+    () =>
+      options.map((option) => (
+        <Option key={option} onClick={handleSelectOption(option)}>
+          {option}
+        </Option>
+      )),
+    [options]
+  );
+
+  useLayoutEffect(() => {
+    if (selectedValue !== value) {
+      setSelectedValue(value);
+    }
+  });
 
   return (
     <DropDown width={width} ref={ref as React.RefObject<HTMLDivElement>}>
-      <SelectedButton onClick={handleClick}>
+      <SelectedButton onClick={handleClick} aria-label="selector-button">
         <SelectedOption $isPlaceHolder={!selectedValue}>
           {selectedValue || placeholder}
         </SelectedOption>
         {icons.arrow}
       </SelectedButton>
-      {isOpen && (
-        <OptionList>
-          {options.map((option) => (
-            <Option key={option} onClick={handleSelectOption(option)}>
-              {option}
-            </Option>
-          ))}
-        </OptionList>
-      )}
+      {isOpen && <OptionList>{optionsItems}</OptionList>}
     </DropDown>
   );
 };

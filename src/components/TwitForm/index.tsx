@@ -81,8 +81,12 @@ export const TwitForm: React.FC<TwitFormProps> = ({ onDone, setOpen }) => {
         <Text>{image && (image.length > 0 ? image[0].name : '')}</Text>
       </InputContainer>
       <ButtonsContainer>
-        <Button type="submit">Twit</Button>
-        <Button onClick={onCancel}>Cancel</Button>
+        <Button type="submit" aria-label="add-button">
+          Twit
+        </Button>
+        <Button onClick={onCancel} aria-label="cancel-button">
+          Cancel
+        </Button>
       </ButtonsContainer>
     </Form>
   );

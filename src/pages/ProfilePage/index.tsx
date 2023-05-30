@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Loader } from '@/components/Loader';
 import { ProfileHeader } from '@/components/ProfileHeader';
@@ -35,6 +35,22 @@ export const ProfilePage = () => {
     setTwits(twits);
   };
 
+  const twitsListItems = useMemo(
+    () =>
+      twits.map(({ authorName, text, createdAt, id, authorEmail, image }) => (
+        <Twit
+          authorName={authorName}
+          authorEmail={authorEmail}
+          text={text}
+          createdAt={createdAt}
+          id={id}
+          key={id}
+          image={image}
+        />
+      )),
+    [twits]
+  );
+
   const [menu, search] = useSideMenus();
 
   useEffect(() => {
@@ -69,19 +85,7 @@ export const ProfilePage = () => {
               <Loader />
             </LoaderContainer>
           ) : (
-            twits.map(
-              ({ authorName, text, createdAt, id, authorEmail, image }) => (
-                <Twit
-                  authorName={authorName}
-                  authorEmail={authorEmail}
-                  text={text}
-                  createdAt={createdAt}
-                  id={id}
-                  key={id}
-                  image={image}
-                />
-              )
-            )
+            twitsListItems
           )}
         </TwitsContainer>
       </FeedContainer>

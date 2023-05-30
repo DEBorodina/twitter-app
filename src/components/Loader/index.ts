@@ -10,9 +10,10 @@ const rotation = keyframes`
 `;
 
 export const Loader = styled.div`
-  width: 48px;
-  height: 48px;
-  border: 3px solid #1da1f2;
+  width: ${(props) => props.theme.LOADER_SIZE}px;
+  height: ${(props) => props.theme.LOADER_SIZE}px;
+  border: ${(props) => props.theme.LOADER_LINE_SIZE}px solid
+    ${(props) => props.theme.BLUE_COLOR};
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;

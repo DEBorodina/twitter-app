@@ -4,8 +4,8 @@ export const Form = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  min-height: 300px;
+  padding: ${(props) => props.theme.TWIT_FORM_PADDING * 2}px;
+  min-height: ${(props) => props.theme.MIN_FORM_HEIGHT}px;
 `;
 
 export const LoaderContainer = styled.div`
@@ -18,27 +18,27 @@ export const LoaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: ${(props) => props.theme.MODAl_RADIUS}px;
 `;
 
 export const Title = styled.h1`
-  font-size: 32px;
-  font-weight: 400;
-  margin-bottom: 10px;
+  font-size: ${(props) => props.theme.TITLE_SIZE}px;
+  font-weight: ${(props) => props.theme.MEDIUM_FONT_WEIGHT};
+  margin-bottom: ${(props) => props.theme.TWIT_FORM_PADDING}px;
   color: ${(props) => props.theme.textColor};
 `;
 
 export const TextArea = styled.textarea`
   width: 100%;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: ${(props) => props.theme.TWIT_FORM_PADDING * 2}px;
   background: ${(props) => props.theme.inputColor};
   color: ${(props) => props.theme.textColor};
-  border-radius: 10px;
+  border-radius: ${(props) => props.theme.TEXT_AREA_BORDER_RADIUS}px;
   border: none;
   outline: none;
-  padding: 10px;
-  height: 100px;
+  padding: ${(props) => props.theme.TWIT_FORM_PADDING}px;
+  height: ${(props) => props.theme.TEXT_AREA_HEIGHT}px;
   resize: none;
 
   &::placeholder {
@@ -49,7 +49,7 @@ export const TextArea = styled.textarea`
 export const InputContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: ${(props) => props.theme.TWIT_FORM_PADDING * 2.5}px;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -59,7 +59,7 @@ export const ButtonsContainer = styled.div`
 `;
 
 export const Label = styled.label`
-  margin-right: 10px;
+  margin-right: ${(props) => props.theme.TWIT_FORM_PADDING}px;
 
   &:hover {
     filter: brightness(0.9);
@@ -72,14 +72,14 @@ export const FileInput = styled.input`
 `;
 
 export const Button = styled.button`
-  width: 70px;
-  background: #1da1f2;
-  border-radius: 20px;
-  height: 30px;
-  color: #ffffff;
+  width: ${(props) => props.theme.FORM_BUTTON_WIDTH}px;
+  background: ${(props) => props.theme.BLUE_COLOR};
+  border-radius: ${(props) => props.theme.INPUT_BUTTON_BORDER_RADIUS}px;
+  height: ${(props) => props.theme.FORM_BUTTON_HEIGHT}px;
+  color: ${(props) => props.theme.WHITE_COLOR};
   border: none;
-  font-size: 14px;
-  margin-left: 20px;
+  font-size: ${(props) => props.theme.TWIT_FORM_FONT_SIZE}px;
+  margin-left: ${(props) => props.theme.TWIT_FORM_PADDING * 2}px;
 
   &:hover {
     filter: brightness(0.9);
@@ -88,11 +88,11 @@ export const Button = styled.button`
 `;
 
 export const Text = styled.p`
-  font-size: 12px;
-  height: 18px;
+  font-size: ${(props) => props.theme.TWIT_FORM_FONT_SIZE - 2}px;
+  height: ${(props) => props.theme.TEXT_HEIGHT}px;
 `;
 
 export const ErrorText = styled(Text)`
-  color: red;
-  margin-bottom: 10px;
+  color: ${(props) => props.theme.ERROR_COLOR};
+  margin-bottom: ${(props) => props.theme.TWIT_FORM_PADDING}px;
 `;
