@@ -20,7 +20,7 @@ import {
 
 export const ProfilePage = () => {
   const [twits, isLoading, fetchData] = useFirebaseHelper(
-    TwitsHelper.getAllTwits
+    TwitsHelper.getUserTwits
   );
   const [menu, search] = useSideMenus();
 

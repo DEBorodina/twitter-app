@@ -8,13 +8,13 @@ export const useFirebaseHelper = <DataType>(
 
   const submit = async () => {
     setIsLoading(true);
-    const twits = await fetchData();
+    const responseData = await fetchData();
     setIsLoading(false);
-    setData(twits);
+    setData(responseData);
   };
 
   useEffect(() => {
-    fetchData();
+    submit();
   }, []);
 
   return [data, isLoading, submit];
