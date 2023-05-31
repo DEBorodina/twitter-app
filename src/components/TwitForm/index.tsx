@@ -1,10 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as Yup from 'yup';
 
 import { icons } from '@/constants/icons';
 import { TwitsHelper } from '@/utils/TwitsHelper';
+import { addTwitValidationSchema } from '@/utils/validationSchemas';
 
 import { Loader } from '../Loader';
 import {
@@ -25,12 +25,7 @@ import { AddTwitProps, TwitFormProps } from './types';
 export const TwitForm: React.FC<TwitFormProps> = ({ onDone, setOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const validationSchema = Yup.object().shape({
-    text: Yup.string().required('Text is required'),
-    image: Yup.mixed(),
-  });
-
-  const formOptions = { resolver: yupResolver(validationSchema) };
+  const formOptions = { resolver: yupResolver(addTwitValidationSchema) };
 
   const { register, handleSubmit, clearErrors, formState, watch } =
     useForm<AddTwitProps>(formOptions);

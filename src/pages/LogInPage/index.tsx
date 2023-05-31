@@ -1,13 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import {} from 'react-redux';
-import * as Yup from 'yup';
 
 import { icons } from '@/constants/icons';
 import { ROUTE_NAMES } from '@/constants/routesNames';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { resetAuthErrors, signIn } from '@/store/actions/authActions';
 import { ICredentials } from '@/types';
+import { loginValidationSchema } from '@/utils/validationSchemas';
 
 import {
   Container,
@@ -27,14 +27,7 @@ export const LogInPage = () => {
     dispatch(signIn({ email, password }));
   };
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email is invalid'),
-    password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters'),
-  });
-
-  const formOptions = { resolver: yupResolver(validationSchema) };
+  const formOptions = { resolver: yupResolver(loginValidationSchema) };
 
   const { register, handleSubmit, clearErrors, formState } =
     useForm<ICredentials>(formOptions);
