@@ -21,19 +21,12 @@ import {
 export const ProfilePage = () => {
   const [twits, setTwits] = useState([] as ITwitDataWithUserWithId[]);
   const [isLoading, setIsLoading] = useState(true);
+  const [menu, search] = useSideMenus();
 
   const { name, email, gender, telegram, isLoaded } = useAppSelector(
     (state) => state.firebase.profile
   );
-
   const user = { name, email, gender, telegram, isLoaded };
-
-  const fetchData = async () => {
-    setIsLoading(true);
-    const twits = await TwitsHelper.getUserTwits();
-    setIsLoading(false);
-    setTwits(twits);
-  };
 
   const twitsListItems = useMemo(
     () =>
@@ -51,7 +44,12 @@ export const ProfilePage = () => {
     [twits]
   );
 
-  const [menu, search] = useSideMenus();
+  const fetchData = async () => {
+    setIsLoading(true);
+    const twits = await TwitsHelper.getUserTwits();
+    setIsLoading(false);
+    setTwits(twits);
+  };
 
   useEffect(() => {
     fetchData();

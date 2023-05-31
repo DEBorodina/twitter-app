@@ -50,7 +50,7 @@ export const TwitForm: React.FC<TwitFormProps> = ({ onDone, setOpen }) => {
   };
 
   const image = watch('image');
-
+  const displayError = err.text?.message?.toString();
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       {isLoading && (
@@ -59,7 +59,7 @@ export const TwitForm: React.FC<TwitFormProps> = ({ onDone, setOpen }) => {
         </LoaderContainer>
       )}
       <Title>Add Twit</Title>
-      <ErrorText>{err.text?.message?.toString()}</ErrorText>
+      <ErrorText>{displayError}</ErrorText>
       <TextArea
         placeholder="Twit"
         {...register('text')}

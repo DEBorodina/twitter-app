@@ -26,6 +26,11 @@ export const SearchSideBar = <T extends { id: string }>({
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState('');
 
+  const itemsList = useMemo(
+    () => users.map((data) => <ListItem {...data} key={data.id} />),
+    [users]
+  );
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     setStatus('');
@@ -52,11 +57,6 @@ export const SearchSideBar = <T extends { id: string }>({
 
     setIsLoading(false);
   };
-
-  const itemsList = useMemo(
-    () => users.map((data) => <ListItem {...data} key={data.id} />),
-    [users]
-  );
 
   return (
     <Menu ref={innerRef}>

@@ -65,6 +65,11 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
     dispatch(changeTheme(option as theme));
   };
 
+  const displayError =
+    err.name?.message?.toString() ||
+    err.telegram?.message?.toString() ||
+    err.password?.message?.toString();
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       {isLoading && (
@@ -73,11 +78,7 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
         </LoaderContainer>
       )}
       <Title>Edit Profile</Title>
-      <ErrorText>
-        {err.name?.message?.toString() ||
-          err.telegram?.message?.toString() ||
-          err.password?.message?.toString()}
-      </ErrorText>
+      <ErrorText>{displayError}</ErrorText>
       <Text>User name</Text>
       <Input
         placeholder="User name"

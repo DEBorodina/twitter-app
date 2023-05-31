@@ -23,28 +23,29 @@ export const LogInPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = ({ email, password }: ICredentials) => {
-    dispatch(signIn({ email, password }));
-  };
-
   const formOptions = { resolver: yupResolver(loginValidationSchema) };
 
   const { register, handleSubmit, clearErrors, formState } =
     useForm<ICredentials>(formOptions);
   const { errors: err } = formState;
 
+  const onSubmit = ({ email, password }: ICredentials) => {
+    dispatch(signIn({ email, password }));
+  };
+
   const handleChange = () => {
     clearErrors();
     dispatch(resetAuthErrors());
   };
 
+  const displayError =
+    err.email?.message || err.password?.message || errors || ' ';
+
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
       {icons.twitter}
       <Title>Log in to Twitter</Title>
-      <ErrorText>
-        {err.email?.message || err.password?.message || errors || ' '}
-      </ErrorText>
+      <ErrorText>{displayError}</ErrorText>
       <Input
         placeholder="Email address"
         type="text"

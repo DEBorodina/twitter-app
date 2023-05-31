@@ -16,11 +16,11 @@ export const SearchTwit: React.FC<ITwitDataWithId> = ({
 }) => {
   const [isTwitOpen, setIsTwitOpen] = useState(false);
 
+  const { name, email } = useAppSelector((state) => state.firebase.profile);
+
   const handleClick = () => {
     setIsTwitOpen(true);
   };
-
-  const { name, email } = useAppSelector((state) => state.firebase.profile);
 
   return (
     <TwitContainer onClick={handleClick}>

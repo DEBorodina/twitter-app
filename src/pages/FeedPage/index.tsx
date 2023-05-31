@@ -24,13 +24,7 @@ import {
 export const FeedPage = () => {
   const [twits, setTwits] = useState([] as ITwitDataWithUserWithId[]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const fetchData = async () => {
-    setIsLoading(true);
-    const twits = await TwitsHelper.getAllTwits();
-    setIsLoading(false);
-    setTwits(twits);
-  };
+  const [menu, search] = useSideMenus();
 
   const twitsList = useMemo(
     () =>
@@ -48,7 +42,12 @@ export const FeedPage = () => {
     [twits]
   );
 
-  const [menu, search] = useSideMenus();
+  const fetchData = async () => {
+    setIsLoading(true);
+    const twits = await TwitsHelper.getAllTwits();
+    setIsLoading(false);
+    setTwits(twits);
+  };
 
   useEffect(() => {
     fetchData();

@@ -29,14 +29,6 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
 
     const dispatch = useAppDispatch();
 
-    const onAddTwit = () => {
-      setOpenModal(true);
-    };
-
-    const onSignOut = () => {
-      dispatch(signOut());
-    };
-
     const menuListItems = useMemo(
       () =>
         menuItems.map(({ to, title, icon, selectedIcon }) => (
@@ -49,6 +41,14 @@ export const SideMenu = forwardRef<HTMLDivElement, SideMenuProps>(
         )),
       []
     );
+
+    const onAddTwit = () => {
+      setOpenModal(true);
+    };
+
+    const onSignOut = () => {
+      dispatch(signOut());
+    };
 
     return (
       <Menu ref={ref}>

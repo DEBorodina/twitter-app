@@ -23,10 +23,6 @@ export const SignUpPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = ({ email, password, name, date }: SignUpData) => {
-    dispatch(signUp({ email, password, birthday: new Date(date), name }));
-  };
-
   const formOptions = {
     resolver: yupResolver(signUpValidationSchema),
   };
@@ -40,18 +36,23 @@ export const SignUpPage = () => {
     dispatch(resetAuthErrors());
   };
 
+  const onSubmit = ({ email, password, name, date }: SignUpData) => {
+    dispatch(signUp({ email, password, birthday: new Date(date), name }));
+  };
+
+  const displayError =
+    err.email?.message ||
+    err.password?.message ||
+    err.name?.message ||
+    err.date?.message ||
+    errors ||
+    ' ';
+
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
       {icons.twitter}
       <Title>Create an account</Title>
-      <ErrorText>
-        {err.email?.message ||
-          err.password?.message ||
-          err.name?.message ||
-          err.date?.message ||
-          errors ||
-          ' '}
-      </ErrorText>
+      <ErrorText>{displayError}</ErrorText>
       <Input
         placeholder="Name"
         type="text"
