@@ -2,15 +2,13 @@ import { useState } from 'react';
 
 import { Selector } from '@/components/Selector';
 import { monthNames } from '@/constants/monthNames';
+import { DataHelper } from '@/utils/DataHelper';
 
 import { DataSelectors, Label } from './styles';
 import { DatePickerInputProps } from './types';
 
-const years = new Array(new Date().getFullYear() - 1900)
-  .fill(0)
-  .map((_, i) => `${new Date().getFullYear() - i}`);
-
-const days = new Array(31).fill(0).map((_, i) => `${i + 1}`);
+const days = DataHelper.getDays();
+const years = DataHelper.getYears();
 
 export const DatePickerInput: React.FC<DatePickerInputProps> = ({
   onChange,
