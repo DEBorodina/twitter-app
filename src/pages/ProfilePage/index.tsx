@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { Loader } from '@/components/Loader';
 import { ProfileHeader } from '@/components/ProfileHeader';
@@ -7,8 +7,8 @@ import { SearchTwit } from '@/components/SearchTwit';
 import { SideMenu } from '@/components/SideMenu';
 import { Twit } from '@/components/Twit';
 import { WhatsHappeningForm } from '@/components/WhatsHappeningForm';
-import { useAppSelector, useSideMenus } from '@/hooks';
-import { ITwitDataWithUserWithId, IUserData } from '@/types';
+import { useAppSelector, useFirebaseHelper, useSideMenus } from '@/hooks';
+import { IUserData } from '@/types';
 import { TwitsHelper } from '@/utils/TwitsHelper';
 
 import {
@@ -19,8 +19,9 @@ import {
 } from './styles';
 
 export const ProfilePage = () => {
-  const [twits, setTwits] = useState([] as ITwitDataWithUserWithId[]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [twits, isLoading, fetchData] = useFirebaseHelper(
+    TwitsHelper.getAllTwits
+  );
   const [menu, search] = useSideMenus();
 
   const { name, email, gender, telegram, isLoaded } = useAppSelector(
@@ -43,17 +44,6 @@ export const ProfilePage = () => {
       )),
     [twits]
   );
-
-  const fetchData = async () => {
-    setIsLoading(true);
-    const twits = await TwitsHelper.getUserTwits();
-    setIsLoading(false);
-    setTwits(twits);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <Container>
