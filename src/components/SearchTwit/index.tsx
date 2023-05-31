@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { formatDistanceToNowStrict } from 'date-fns';
 import { useState } from 'react';
 
 import { useAppSelector } from '@/hooks';
@@ -38,7 +38,7 @@ export const SearchTwit: React.FC<ITwitDataWithId> = ({
         </Modal>
       )}
       <Text>{text}</Text>
-      <Date>{moment(createdAt).fromNow()}</Date>
+      <Date>{formatDistanceToNowStrict(createdAt) + ' ago'}</Date>
     </TwitContainer>
   );
 };
