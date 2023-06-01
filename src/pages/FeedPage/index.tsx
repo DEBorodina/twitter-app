@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { Loader } from '@/components/Loader';
 import { SearchSideBar } from '@/components/SearchSideBar';
@@ -6,8 +6,7 @@ import { SearchUser } from '@/components/SearchUser';
 import { SideMenu } from '@/components/SideMenu';
 import { Twit } from '@/components/Twit';
 import { icons } from '@/constants/icons';
-import { useSideMenus } from '@/hooks';
-import { ITwitDataWithUserWithId } from '@/types';
+import { useFirebaseHelper, useSideMenus } from '@/hooks';
 import { TwitsHelper } from '@/utils/TwitsHelper';
 import { UserHelper } from '@/utils/UserHelper';
 
@@ -22,15 +21,10 @@ import {
 } from './styles';
 
 export const FeedPage = () => {
-  const [twits, setTwits] = useState([] as ITwitDataWithUserWithId[]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const fetchData = async () => {
-    setIsLoading(true);
-    const twits = await TwitsHelper.getAllTwits();
-    setIsLoading(false);
-    setTwits(twits);
-  };
+  const [twits, isLoading, fetchData] = useFirebaseHelper(
+    TwitsHelper.getAllTwits
+  );
+  const [menu, search] = useSideMenus();
 
   const twitsList = useMemo(
     () =>
@@ -47,12 +41,6 @@ export const FeedPage = () => {
       )),
     [twits]
   );
-
-  const [menu, search] = useSideMenus();
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <Container>

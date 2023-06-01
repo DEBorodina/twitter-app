@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { formatDistanceToNowStrict } from 'date-fns';
 import { useState } from 'react';
 
 import { useAppSelector } from '@/hooks';
@@ -16,11 +16,11 @@ export const SearchTwit: React.FC<ITwitDataWithId> = ({
 }) => {
   const [isTwitOpen, setIsTwitOpen] = useState(false);
 
+  const { name, email } = useAppSelector((state) => state.firebase.profile);
+
   const handleClick = () => {
     setIsTwitOpen(true);
   };
-
-  const { name, email } = useAppSelector((state) => state.firebase.profile);
 
   return (
     <TwitContainer onClick={handleClick}>
@@ -38,7 +38,7 @@ export const SearchTwit: React.FC<ITwitDataWithId> = ({
         </Modal>
       )}
       <Text>{text}</Text>
-      <Date>{moment(createdAt).fromNow()}</Date>
+      <Date>{formatDistanceToNowStrict(createdAt) + ' ago'}</Date>
     </TwitContainer>
   );
 };

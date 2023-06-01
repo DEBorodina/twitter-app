@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import * as Yup from 'yup';
 
 import { theme } from '@/constants/themes';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { changeTheme } from '@/store/actions/themeActions';
 import { UserHelper } from '@/utils/UserHelper';
+import { editProfileValidationSchema } from '@/utils/validationSchemas';
 
 import { Loader } from '../Loader';
 import { Selector } from '../Selector';
@@ -34,20 +34,8 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
 
   const currentTheme = useAppSelector((state) => state.theme.theme);
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required('User name is required'),
-    telegram: Yup.string().matches(
-      /^$|.*?\B@\w{5}.*/,
-      'Telegram link is not valid'
-    ),
-    password: Yup.string().matches(/.{6,}/, {
-      excludeEmptyString: true,
-      message: 'Password must be at least 6 characters',
-    }),
-  });
-
   const formOptions = {
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(editProfileValidationSchema),
     defaultValues: { name, telegram, gender },
   };
 
@@ -77,6 +65,11 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
     dispatch(changeTheme(option as theme));
   };
 
+  const displayError =
+    err.name?.message?.toString() ||
+    err.telegram?.message?.toString() ||
+    err.password?.message?.toString();
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       {isLoading && (
@@ -85,11 +78,7 @@ export const EditProfileForm: React.FC<EditProfileFormProps> = ({
         </LoaderContainer>
       )}
       <Title>Edit Profile</Title>
-      <ErrorText>
-        {err.name?.message?.toString() ||
-          err.telegram?.message?.toString() ||
-          err.password?.message?.toString()}
-      </ErrorText>
+      <ErrorText>{displayError}</ErrorText>
       <Text>User name</Text>
       <Input
         placeholder="User name"

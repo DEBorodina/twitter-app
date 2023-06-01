@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { formatDistanceToNowStrict } from 'date-fns';
 import { useState } from 'react';
 
 import { Loader } from '../Loader';
@@ -35,7 +35,7 @@ export const Twit: React.FC<TwitProps> = ({
       <Container>
         <Data>
           <UserName>{authorName}</UserName>
-          <Time>{moment(createdAt).fromNow()}</Time>
+          <Time>{formatDistanceToNowStrict(createdAt) + ' ago'}</Time>
         </Data>
         <UserEmail>{authorEmail}</UserEmail>
         <Text>{text}</Text>

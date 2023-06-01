@@ -27,10 +27,6 @@ import {
 export const HomePage = () => {
   const dispatch = useAppDispatch();
 
-  const signUpWithGoogle = () => {
-    dispatch(signInWithGoogle());
-  };
-
   const footerLinksItems = useMemo(
     () =>
       footerLinks.map(({ name, to }) => (
@@ -40,6 +36,10 @@ export const HomePage = () => {
       )),
     []
   );
+
+  const signUpWithGoogle = () => {
+    dispatch(signInWithGoogle());
+  };
 
   return (
     <Container>

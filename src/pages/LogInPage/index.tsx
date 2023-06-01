@@ -1,13 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import {} from 'react-redux';
-import * as Yup from 'yup';
 
 import { icons } from '@/constants/icons';
 import { ROUTE_NAMES } from '@/constants/routesNames';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 import { resetAuthErrors, signIn } from '@/store/actions/authActions';
 import { ICredentials } from '@/types';
+import { loginValidationSchema } from '@/utils/validationSchemas';
 
 import {
   Container,
@@ -23,35 +23,29 @@ export const LogInPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const onSubmit = ({ email, password }: ICredentials) => {
-    dispatch(signIn({ email, password }));
-  };
-
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email is invalid'),
-    password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters'),
-  });
-
-  const formOptions = { resolver: yupResolver(validationSchema) };
+  const formOptions = { resolver: yupResolver(loginValidationSchema) };
 
   const { register, handleSubmit, clearErrors, formState } =
     useForm<ICredentials>(formOptions);
   const { errors: err } = formState;
+
+  const onSubmit = ({ email, password }: ICredentials) => {
+    dispatch(signIn({ email, password }));
+  };
 
   const handleChange = () => {
     clearErrors();
     dispatch(resetAuthErrors());
   };
 
+  const displayError =
+    err.email?.message || err.password?.message || errors || ' ';
+
   return (
     <Container onSubmit={handleSubmit(onSubmit)}>
       {icons.twitter}
       <Title>Log in to Twitter</Title>
-      <ErrorText>
-        {err.email?.message || err.password?.message || errors || ' '}
-      </ErrorText>
+      <ErrorText>{displayError}</ErrorText>
       <Input
         placeholder="Email address"
         type="text"
